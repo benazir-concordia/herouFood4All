@@ -106,7 +106,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'food4all-database',
+        'NAME': 'food4alldb',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
                 'host': 'mongodb+srv://Atlasadmin:2concordia1@leaflix-east.kfz8a64.mongodb.net/?retryWrites=true&w=majority'
