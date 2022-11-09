@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn FOOD4ALL.food4all.wsgi --log-file -
+web: gunicorn food4all.wsgi --log-file -
