@@ -34,7 +34,7 @@ jobs:
       - name: Check Syntax #We are just testing the syntax in names app; pycodestyle uses pep8 conventions of max line length of 79 characters while Django recommends 119 characters
         run: pycodestyle --statistics names
   #Before deploy job you would usually have the build job in case you are using docker images
-  deploy-job:
+  deploy:
     runs-on: ubuntu-latest
     needs: [health-checkup-job]
     if: ${{ github.event_name == 'push' }}
