@@ -102,7 +102,7 @@ class Login extends Component {
 
                       className="login-form-button"
                     >
-                      Log in
+                      Log in ci/cd
                     </Button>
                   </div>
                   <div>
