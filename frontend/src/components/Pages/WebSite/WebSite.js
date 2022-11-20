@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import { Avatar } from "antd";
+import { Avatar, Button } from "antd";
 import { connect } from "react-redux";
 import SitePic from "./cost-of-waste-in-canada.png";
-
 class WebSite extends Component {
   constructor(props) {
     super(props);
@@ -32,9 +31,9 @@ class WebSite extends Component {
         </div>
         <div>
             <h1>API Links to retrive exposed data</h1>
-            <p>API Link for all currently requested foods: <Link to="api/food/all_currently_requested_food">food4allappflix.herokuapp.com/api/food/all_currently_requested_food</Link></p>
-            <p>API Link for all currently available foods: <Link to="api/food/all_currently_available_food">food4allappflix.herokuapp.com/api/food/all_currently_available_food</Link></p>
-            <p>API Link for all expired/wasted foods: <Link to="api/food/all_expired_food">food4allappflix.herokuapp.com/api/food/all_expired_food</Link></p>
+            <p>API Link for all currently requested foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_currently_requested_food')}>food4allappflix.herokuapp.com/api/food/all_currently_requested_food</Button></p>
+            <p>API Link for all currently available foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_currently_available_food')}>food4allappflix.herokuapp.com/api/food/all_currently_available_food</Button></p>
+            <p>API Link for all expired/wasted foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_expired_food')}>food4allappflix.herokuapp.com/api/food/all_expired_food</Button></p>
         </div>
         </div>
       </Fragment>
