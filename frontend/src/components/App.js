@@ -16,6 +16,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard"
 import RequestedFood from "./Pages/RequestedFood/RequestedFood"
 import ReceiverDashboard from "./Pages/Dashboard/ReceiverDashboard,"
 import FoodDetails from "./Pages/FoodDetails/FoodDetails"
+import WebSite from "./Pages/WebSite/WebSite"
 import Page404 from "./Common/Page404/Page404";
 
 if (process.env.NODE_ENV === "development") {
@@ -37,6 +38,7 @@ class App extends Component {
     appRoutes = (
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route exact path="/site" component={WebSite} />
         <Route path="/create-user" component={CreateUser} />
         <PrivateRoute path="/app/change-password" component={Profile} />
         <PrivateRoute path="/app/food-post" component={FoodDetails} />

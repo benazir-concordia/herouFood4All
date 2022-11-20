@@ -24,6 +24,7 @@ urlpatterns = [
     path("", index, name="index"),
     path("login", index, name="index"),
     path("create-user", index, name="index"),
+    path("site", index, name="index"),
     re_path(r'^app/.*$', index, name='index'),
     path('auth/', include("authentication.urls")),
     path('api/', include('foodwasteapp.urls')),

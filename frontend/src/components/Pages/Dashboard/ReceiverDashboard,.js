@@ -25,7 +25,7 @@ const center1 = { lat: 45.50779414299507, lng: -73.58749293062847 }
 
 function ReceiverDashboard() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyAOk7NT2sEQoJAGGWIobaoJM1kmnE4zgho',
+    googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
     libraries: ['places'],
   })
 

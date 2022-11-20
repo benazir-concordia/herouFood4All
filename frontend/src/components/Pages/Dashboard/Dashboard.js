@@ -30,15 +30,15 @@ class Dashboard extends Component {
       });
       this.refs.childdelete.showModal(record);
   }
-  accept_food=(itm)=>{
-    let body={
-      "status":"accepted"
-    }
-    this.props.edit_food(
-        body,
-        itm.id,
-    );
-  }
+  // accept_food=(itm)=>{
+  //   let body={
+  //     "status":"accepted"
+  //   }
+  //   this.props.edit_food(
+  //       body,
+  //       itm.id,
+  //   );
+  // }
   request_food=(itm)=>{
     let body={
       "status":"requested",

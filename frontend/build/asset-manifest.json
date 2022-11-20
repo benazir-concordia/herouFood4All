@@ -1,16 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.350e1083.css",
-    "main.js": "/static/js/main.6016734c.js",
+    "main.js": "/static/js/main.e14ffd3d.js",
     "static/js/787.d8c6ec95.chunk.js": "/static/js/787.d8c6ec95.chunk.js",
+    "static/media/cost-of-waste-in-canada.png": "/static/media/cost-of-waste-in-canada.7ad7d2228722ef86005d.png",
     "static/media/default.png": "/static/media/default.522560c8ca5313e66b8c.png",
     "index.html": "/index.html",
     "main.350e1083.css.map": "/static/css/main.350e1083.css.map",
-    "main.6016734c.js.map": "/static/js/main.6016734c.js.map",
+    "main.e14ffd3d.js.map": "/static/js/main.e14ffd3d.js.map",
     "787.d8c6ec95.chunk.js.map": "/static/js/787.d8c6ec95.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.350e1083.css",
-    "static/js/main.6016734c.js"
+    "static/js/main.e14ffd3d.js"
   ]
 }

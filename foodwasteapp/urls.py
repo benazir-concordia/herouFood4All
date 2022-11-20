@@ -7,5 +7,7 @@ urlpatterns = [
     path('food/', FoodAPI.as_view()),
     path('food/<int:id>', FoodAPI.as_view()),
     path('get_posted_food/', PostedFoodAPI.as_view()),
+    # EXPOSED API
+    path('food/<str:type>', ExposeAPI.as_view()),
 
 ]

@@ -61,9 +61,8 @@ class PostedFoodAPI(APIView):
     def get(self, request, *args, **kwargs):
         if not request.user.groups.all():
             return Response(None)
-
+        # all requested food by requested donor
         if request.GET.get('type') == "requested_food":
-
             fooddetails = FoodDetails.objects.filter(
                 ~Q(status="available"), requested_by=request.user)
 
@@ -71,15 +70,38 @@ class PostedFoodAPI(APIView):
                 fooddetails, many=True)
             return Response(foodDetails_serializer.data)
 
+        # donor's posted foods (delete delivered food which has been requested)
         if (request.user.groups.all()[0].id == 1):
             fooddetails = FoodDetails.objects.filter(
                 posted_by=request.user)
+
+        # all currently available foods
         else:
             date_from = datetime.now() - timedelta(days=1)
-            # print(date_from, 'date_fromdate_from')
             fooddetails = FoodDetails.objects.filter(
                 status="available", posted_date__gte=date_from)
 
+        foodDetails_serializer = FoodDetailsSerializer(
+            fooddetails, many=True)
+        return Response(foodDetails_serializer.data)
+
+
+class ExposeAPI(APIView):
+
+    def get(self, request, type, *args, **kwargs):
+        # all currently requested foods
+        if type == "all_currently_requested_food":
+            fooddetails = FoodDetails.objects.filter(status="requested")
+        # all currently available foods
+        elif type == "all_currently_available_food":
+            date_from = datetime.now() - timedelta(days=1)
+            fooddetails = FoodDetails.objects.filter(
+                status="available", posted_date__gte=date_from)
+        # all expired/wasted foods
+        elif type == "all_expired_food":
+            date_from = datetime.now() - timedelta(days=1)
+            fooddetails = FoodDetails.objects.filter(
+                status="available", posted_date__lte=date_from)
         foodDetails_serializer = FoodDetailsSerializer(
             fooddetails, many=True)
         return Response(foodDetails_serializer.data)
