@@ -1,71 +1,53 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { create_user} from "../../../actions/users";
+import {
+ 
+  SkeletonText,
+} from '@chakra-ui/react'
 import { Form, Input, Button, Select, InputNumber } from "antd";
 import { connect } from "react-redux";
+import {
+  Autocomplete,
+  useJsApiLoader
+} from '@react-google-maps/api'
 
-class CreateUser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      componentSize: "default",
-      admin: null,
-      saving: false,
-    };
+const CreateUser = (props) => {
+  const [value, setValue] = useState({admin: true,saving: false});
+  const [form] = Form.useForm();
+  const { isLoaded } = useJsApiLoader({
+    // googleMapsApiKey: 'AIzaSyDCUiR6W8hmQI3vEn_LkQebO2iIhKQJOfo',
+    googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
+    libraries: ['places'],
+  })
+  const originRef = useRef()
+  if (!isLoaded) {
+    return <SkeletonText />
   }
-  formRef = React.createRef();
-  normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-  onFinish = (values) => {
-    values.groups = [values.groups]
-    this.setState({
-      saving: true,
-    });
-    this.props.create_user(values);
-    this.setState({
-      admin: null,
-    });
-  };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.isSaving && !this.props.isSaving) {
-      if (this.props.isSuccess) {
-        this.formRef.current.resetFields();
-      }
-    }
-  }
-
-  Isadmin = (name) => {
+  
+  const Isadmin = (name) => {
     console.log(name)
     if(name==1){
-      this.setState({
-        admin: true,
-      });
+      setValue({admin: true});
     }
     else{
-      this.setState({
-        admin: false,
-      });
+      setValue({admin: false});
     }
    
   };
+  const onFinish = (values) => {
+    console.log(values,'values')
+    console.log(originRef,'originRef')
 
-  render() {
-    console.log(this.state.admin,'this.state.admin')
-    const tailLayout = {
-      wrapperCol: {
-        offset: 6,
-        span: 16,
-      },
+    values.groups = [values.groups]
+    
+    props.create_user(values);
+    setValue({admin: null});
+    form.resetFields();
     };
-    // this.props.all_groups;
-    return (
-      <div className="container-login100">
+  return (
+    <div className="container-login100">
         <div style={{padding: '30px 55px',
                     background: '#fff',
                     borderRadius: '10px',
@@ -75,9 +57,9 @@ class CreateUser extends Component {
                     }}>
           <span className="login100-form-title p-b-41">Food 4 All</span>
         <Form
-          ref={this.formRef}
+          form={form}
           id="create-user-form"
-          onFinish={this.onFinish}
+          onFinish={onFinish}
           // labelAlign="left"
           labelCol={{
             span: 6,
@@ -98,7 +80,7 @@ class CreateUser extends Component {
                 },
               ]}
             >
-              <Input placeholder="Username" onChange={this.validateUsername} />
+              <Input placeholder="Username"/>
             </Form.Item>
             <Form.Item
               label="Password"
@@ -140,7 +122,10 @@ class CreateUser extends Component {
               name="address"
               rules={[{ required: true, message: "Please input address!" }]}
             >
-              <Input placeholder="Address" />
+             <Autocomplete>
+              <Input type='text' placeholder='Address' ref={originRef} />
+            </Autocomplete>
+              {/* <Input placeholder="Address" /> */}
             </Form.Item>
             <Form.Item
             label="Email"
@@ -168,7 +153,7 @@ class CreateUser extends Component {
               <Select
                   style={{ width: "100%" }}
                   placeholder="Please select User type"
-                  onChange={(e)=>this.Isadmin(e)}
+                  onChange={Isadmin}
                 >                  
                         <Select.Option value={1}>
                           Donor
@@ -180,7 +165,7 @@ class CreateUser extends Component {
             </Form.Item>
            
       
-          {this.state.admin==null? null:this.state.admin?
+          {value.admin==null? null:value.admin?
           // <p>Enter donar details</p> 
           <Form.Item
               name="type"
@@ -235,7 +220,7 @@ class CreateUser extends Component {
               style={{background:'#ff7c18', borderColor:'white', marginTop:'10px',width: '200px'}}
               htmlType="submit"
               className="login-form-button"
-              loading={this.props.isSaving}
+              // loading={this.props.isSaving}
             >
               Register
             </Button>
@@ -255,16 +240,14 @@ class CreateUser extends Component {
        
         </div>
       </div>
-    );
-  }
-}
+  );
+};
+function mapStateToProps(state) {
+  return {
+    msg: state.alerts.msg,
+    isSuccess: state.users.isSuccess,
+    isSaving: state.users.isSaving,
+  };
+} 
 
-const mapStateToProps = (state) => ({
-  msg: state.alerts.msg,
-  isSuccess: state.users.isSuccess,
-  isSaving: state.users.isSaving,
-});
-
-export default connect(mapStateToProps, {
-  create_user,
-})(CreateUser);
+export default connect(mapStateToProps,{create_user})(CreateUser);

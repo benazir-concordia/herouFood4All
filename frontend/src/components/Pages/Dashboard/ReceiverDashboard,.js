@@ -25,8 +25,8 @@ const center1 = { lat: 45.50779414299507, lng: -73.58749293062847 }
 
 function ReceiverDashboard() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyDCUiR6W8hmQI3vEn_LkQebO2iIhKQJOfo',
-    // googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
+    // googleMapsApiKey: 'AIzaSyDCUiR6W8hmQI3vEn_LkQebO2iIhKQJOfo',
+    googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
     libraries: ['places'],
   })
 
@@ -56,6 +56,9 @@ function ReceiverDashboard() {
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     })
+    console.log(originRef,'originRef')
+    console.log(destiantionRef.current.value,'destiantionRef.current.value')
+    console.log(results,'results')
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
