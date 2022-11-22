@@ -2,29 +2,14 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { create_user} from "../../../actions/users";
-import {
- 
-  SkeletonText,
-} from '@chakra-ui/react'
 import { Form, Input, Button, Select, InputNumber } from "antd";
 import { connect } from "react-redux";
-import {
-  Autocomplete,
-  useJsApiLoader
-} from '@react-google-maps/api'
+import { usePlacesWidget } from "react-google-autocomplete";
 
 const CreateUser = (props) => {
   const [value, setValue] = useState({admin: true,saving: false});
   const [form] = Form.useForm();
-  const { isLoaded } = useJsApiLoader({
-    // googleMapsApiKey: 'AIzaSyDCUiR6W8hmQI3vEn_LkQebO2iIhKQJOfo',
-    googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
-    libraries: ['places'],
-  })
-  const originRef = useRef()
-  if (!isLoaded) {
-    return <SkeletonText />
-  }
+  
   
   const Isadmin = (name) => {
     console.log(name)
@@ -38,14 +23,22 @@ const CreateUser = (props) => {
   };
   const onFinish = (values) => {
     console.log(values,'values')
-    console.log(originRef,'originRef')
-
     values.groups = [values.groups]
     
     props.create_user(values);
     setValue({admin: null});
     form.resetFields();
     };
+  const { ref } = usePlacesWidget({
+      apiKey: "AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w",
+      onPlaceSelected: (place) => {
+        console.log(place);
+      },
+      options: {
+        types: ["(regions)"],
+        componentRestrictions: { country: "ca" },
+      },
+    });
   return (
     <div className="container-login100">
         <div style={{padding: '30px 55px',
@@ -122,10 +115,7 @@ const CreateUser = (props) => {
               name="address"
               rules={[{ required: true, message: "Please input address!" }]}
             >
-             <Autocomplete>
-              <Input type='text' placeholder='Address' ref={originRef} />
-            </Autocomplete>
-              {/* <Input placeholder="Address" /> */}
+              <input ref={ref} placeholder="Address" />
             </Form.Item>
             <Form.Item
             label="Email"

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^1.8.6",
     "@ant-design/colors": "^6.0.0",
     "@ant-design/icons": "^4.7.0",
+    "@chakra-ui/react": "^1.8.6",
     "@react-google-maps/api": "^2.13.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -17,6 +17,7 @@
     "moment-timezone": "^0.5.34",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-google-autocomplete": "^2.7.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
