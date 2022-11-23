@@ -2,43 +2,77 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { create_user} from "../../../actions/users";
+import {
+ 
+  SkeletonText,
+} from '@chakra-ui/react'
 import { Form, Input, Button, Select, InputNumber } from "antd";
 import { connect } from "react-redux";
-import { usePlacesWidget } from "react-google-autocomplete";
+import {
+  Autocomplete,
+  useJsApiLoader
+} from '@react-google-maps/api'
 
 const CreateUser = (props) => {
-  const [value, setValue] = useState({admin: true,saving: false});
+  const [value, setValue] = useState({formattedAddress:"",admin: true,saving: false,lat:"",lon:""});
+  const [searchResult, setSearchResult] = useState("Result: none");
   const [form] = Form.useForm();
-  
-  
-  const Isadmin = (name) => {
-    console.log(name)
-    if(name==1){
-      setValue({admin: true});
+  const formattedAddress_var="";
+  const { isLoaded } = useJsApiLoader({
+    // googleMapsApiKey: 'AIzaSyDCUiR6W8hmQI3vEn_LkQebO2iIhKQJOfo',
+    googleMapsApiKey: 'AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w',
+    libraries: ['places'],
+  })
+  function onLoad(autocomplete) {
+    setSearchResult(autocomplete);
+  }
+
+  const onPlaceChanged=()=> {
+    if (searchResult != null) {
+      const place = searchResult.getPlace();
+      const formattedAddress = place.formatted_address;
+      setValue({
+        lat:place.geometry.location.lat(),
+        lon:place.geometry.location.lng(),
+        formattedAddress:formattedAddress
+      })
+      
+    } else {
+      alert("Please enter text");
     }
-    else{
-      setValue({admin: false});
-    }
-   
-  };
+  }
   const onFinish = (values) => {
     console.log(values,'values')
     values.groups = [values.groups]
-    
+    values.lat=value.lat
+    values.lon=value.lon
+    values.address=value.formattedAddress
     props.create_user(values);
     setValue({admin: null});
     form.resetFields();
     };
-  const { ref } = usePlacesWidget({
-      apiKey: "AIzaSyDFhHolRp7YU58k2pLeTHcEw2oLhpAT--w",
-      onPlaceSelected: (place) => {
-        console.log(place);
-      },
-      options: {
-        types: ["(regions)"],
-        componentRestrictions: { country: "ca" },
-      },
-    });
+    const Isadmin = (name) => {
+      if(name==1){
+        setValue({
+          admin: true,
+          lat:value.lat,
+          lon:value.lon,
+          formattedAddress:value.formattedAddress 
+        });
+      }
+      else{
+        setValue({admin: false,
+          lat:value.lat,
+          lon:value.lon,
+          formattedAddress:value.formattedAddress 
+        });
+      }
+     
+    };
+  if (!isLoaded) {
+    return <SkeletonText />
+  }
+  
   return (
     <div className="container-login100">
         <div style={{padding: '30px 55px',
@@ -113,9 +147,18 @@ const CreateUser = (props) => {
             <Form.Item
              label="Address"
               name="address"
-              rules={[{ required: true, message: "Please input address!" }]}
+              rules={[{ required: false, message: "Please input address!" }]}
             >
-              <input ref={ref} placeholder="Address" />
+             <Autocomplete onPlaceChanged={onPlaceChanged} onLoad={onLoad}>
+             <input
+                required
+                style={{width:'100%'}}
+                type="text"
+                placeholder="Address"
+            
+          />
+              </Autocomplete>
+              
             </Form.Item>
             <Form.Item
             label="Email"

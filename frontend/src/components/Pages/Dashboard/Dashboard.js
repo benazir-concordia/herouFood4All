@@ -2,12 +2,13 @@ import React, { Component, Fragment } from "react";
 import MainLayout from "../../Layout/MainLayout";
 import { Link } from "react-router-dom";
 import { get_posted_food,edit_food, delete_food } from "../../../actions/food";
-import { Row, Col, Select, Button, Transfer } from "antd";
+import { Row, Col, Select, Button, Avatar } from "antd";
 import { connect } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import UpdateModal from "./UpdateModal";
 import DeleteModal from "../../Common/DeleteModal/DeleteModal";
-
+import './dashboard.css'
+import DefFoodPic from "./food.png";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -87,47 +88,22 @@ class Dashboard extends Component {
             :null}
            
           <h1>List of Posted Food</h1>
-          {/* <LoadScript
-        googleMapsApiKey="AIzaSyAOk7NT2sEQoJAGGWIobaoJM1kmnE4zgho"
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-        >
-        </GoogleMap>
-      </LoadScript> */}
-          {/* <input type="text" placeholder="*Begin typing address" id="id-google-address" name="google_address"/> */}
           <br />
+          
           {this.props.all_posted_food?
-          this.props.all_posted_food.map((itm, i)=>(
-            // <Link key={i} to={`/app/food-details/${itm.id}`}>
-              <div key={i} style={{   background: '#615c5f29',
-                              padding: '20px',
-                              borderRadius: '20px',
-                              marginBottom: '20px'}}>
-                <p>Food: {itm.food_name}</p>
+          this.props.all_posted_food.map((itm, i)=>(            
+              <div key={i} 
+              className="containeri"
+                              >
+              <div style={{textAlign:'center',height: 149}}><Avatar  style={{width: '68%',
+                    height: '100%',
+                    lineHeight: 500,
+                    fontSize: 18}} shape="square" src={DefFoodPic} />
+              </div>
+              <div className="content-box">
+                <h4 className="name" style={{color:"white"}}>{itm.food_name}</h4>
                 <p>Description: {itm.description}</p>
                 {itm.quantity?<p>Food Quantity: {itm.quantity}</p>:null}
-                {user=="donor"? 
-                  <p>Status: {itm.status} 
-                  {itm.status != "available" ?
-                  <div>
-                    <p>Requested By: {itm.requested_by_obj.name}<br/>
-                    Phone: {itm.requested_by_obj.phone}
-                    </p>
-                    {/* <Button
-                          onClick={() => {
-                              this.accept_food(itm);
-                          }}
-                      >
-                        Accept
-                    </Button> */}
-                  </div>
-                  
-                  : null
-                }</p>:
-                  <p>Status: {itm.status==null?"Available":itm.status}</p>}
                 {user=="receiver"? 
                 <div>
                   <p><b>Donor Details :</b></p>
@@ -137,9 +113,10 @@ class Dashboard extends Component {
                 </div>:
                 null
                 }
-              {user=="donor"? 
-              <Fragment>
+                {user=="donor"? 
+              <div>                
                 <Button
+                shape="round"
                       onClick={() => {
                           this.showUpdatetable(itm);
                       }}
@@ -147,26 +124,33 @@ class Dashboard extends Component {
                     Update
                 </Button>
                 <Button
-                    style={{ color: "red" }}
+                shape="round"
+                    style={{ color: "red", marginLeft:20 }}
                     onClick={() => {
                         this.showDeletedata(itm);
                     }}
                 >
+                  Delete
                     <DeleteOutlined style={{ color: "red" }} />
                 </Button>  
-              </Fragment>:
+              </div>:
+              <div>
               <Button
+              shape="round"
                     onClick={() => {
                         this.request_food(itm);
                     }}
                 >
                   Request Food
               </Button>
-              }
-                
+              <Link to={`/app/map/${itm.posted_by_obj.lat}/${itm.posted_by_obj.lon}`}>
+                  check map
+              </Link>
               </div>
-            // </Link> 
-
+              
+              }
+              </div>
+              </div>
           )):null}
          <UpdateModal
                     ref={"childupdate"}

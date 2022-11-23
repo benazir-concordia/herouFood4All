@@ -14,7 +14,7 @@ import CreateUser from "./Pages/CreateUser/CreateUser";
 import Profile from "./Pages/Profile/Profile";
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import RequestedFood from "./Pages/RequestedFood/RequestedFood"
-import ReceiverDashboard from "./Pages/Dashboard/ReceiverDashboard,"
+import MapArea from "./Pages/Dashboard/MapArea"
 import FoodDetails from "./Pages/FoodDetails/FoodDetails"
 import WebSite from "./Pages/WebSite/WebSite"
 import Page404 from "./Common/Page404/Page404";
@@ -44,7 +44,7 @@ class App extends Component {
         <PrivateRoute path="/app/food-post" component={FoodDetails} />
         <PrivateRoute path="/app/requested_food" component={RequestedFood} />
 
-        <PrivateRoute path="/app/map" component={ReceiverDashboard} />
+        <PrivateRoute path="/app/map/:lat/:lon" component={MapArea} />
 
         <PrivateRoute exact path="/" component={Dashboard} />
       </Switch>

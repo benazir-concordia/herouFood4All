@@ -2,12 +2,10 @@ import React, { Component, Fragment } from "react";
 import MainLayout from "../../Layout/MainLayout";
 import { Link } from "react-router-dom";
 import { get_posted_food,edit_food, delete_food } from "../../../actions/food";
-import { Row, Col, Select, Button, Transfer } from "antd";
+import { Row, Col, Select, Button, Avatar } from "antd";
 import { connect } from "react-redux";
-import { DeleteOutlined } from "@ant-design/icons";
-// import UpdateModal from "./UpdateModal";
-import DeleteModal from "../../Common/DeleteModal/DeleteModal";
-
+import "../Dashboard/dashboard.css";
+import DefFoodPic from "../Dashboard/food.png";
 class RequestedFood extends Component {
   constructor(props) {
     super(props);
@@ -73,14 +71,22 @@ class RequestedFood extends Component {
           {this.props.all_posted_food?
           this.props.all_posted_food.map((itm, i)=>(
             // <Link key={i} to={`/app/food-details/${itm.id}`}>
-              <div style={{   background: '#615c5f29',
-                              padding: '20px',
-                              borderRadius: '20px',
-                              marginBottom: '20px'}}>
-                <p>Food: {itm.food_name}</p>
-                <p>Description: {itm.description}</p>
-                <p>Status: {itm.status}</p>
-                {user=="receiver"? 
+              <div  className="containeri"
+              // style={{   background: '#615c5f29',
+              //                 padding: '20px',
+              //                 borderRadius: '20px',
+              //                 marginBottom: '20px'}}
+                              >
+                <div style={{textAlign:'center',height: 149}}><Avatar  style={{width: '68%',
+                    height: '100%',
+                    lineHeight: 500,
+                    fontSize: 18}} shape="square" src={DefFoodPic} /></div>
+                    <div className="content-box">
+                      <h4 className="name" style={{color:"white"}}>{itm.food_name}</h4>
+                      <p>Description: {itm.description}</p>
+                      <p>Food Quantity: {itm.quantity}</p>
+                      <p>Status: {itm.status}</p>
+                      {user=="receiver"? 
                 <div>
                   <p><b>Donor Details :</b></p>
                   <p>Donor : {itm.posted_by_obj.name}</p>
@@ -90,6 +96,9 @@ class RequestedFood extends Component {
                 null
                 }
               
+                    </div>
+               
+               
                 
               </div>
             // </Link> 
