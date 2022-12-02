@@ -201,7 +201,7 @@ const CreateUser = (props) => {
           {value.admin==null? null:value.admin?
           // <p>Enter donar details</p> 
           <Form.Item
-              name="type"
+              name="group_type"
               label="Category"
               rules={[
                 {

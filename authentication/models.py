@@ -53,15 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
     name = models.CharField(null=True, blank=True, max_length=255)
-    # last_name = models.CharField(null=True, blank=True, max_length=255)
     photo = models.ImageField(null=True, blank=True,
                               upload_to="ProfilePhotos")
     phone = models.CharField(null=True, blank=True, max_length=255)
     address = models.CharField(null=True, blank=True, max_length=255)
-    # town = models.CharField(verbose_name="Town/City",max_length=100, null=True, blank=True)
-    # county = models.CharField(verbose_name="County",max_length=100, null=True, blank=True)
-    # post_code = models.CharField(verbose_name="Post Code",max_length=8, null=True, blank=True)
-    # country = models.CharField(verbose_name="Country",max_length=100, null=True, blank=True)
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
 
