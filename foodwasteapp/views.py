@@ -92,20 +92,27 @@ class ExposeAPI(APIView):
         # all currently requested foods
         if type == "all_currently_requested_food":
             fooddetails = FoodDetails.objects.filter(status="requested")
+            foodDetails_serializer = FoodDetailsSerializer(
+                fooddetails, many=True)
         # all currently available foods
         elif type == "all_currently_available_food":
             date_from = datetime.now() - timedelta(days=1)
             fooddetails = FoodDetails.objects.filter(
                 status="available", posted_date__gte=date_from)
+            foodDetails_serializer = FoodDetailsSerializer(
+                fooddetails, many=True)
         # all expired/wasted foods
         elif type == "all_expired_food":
             date_from = datetime.now() - timedelta(days=1)
             fooddetails = FoodDetails.objects.filter(
                 status="available", posted_date__lte=date_from)
+            foodDetails_serializer = FoodDetailsSerializer(
+                fooddetails, many=True)
         # all listed donors
         elif type == "all_listed_donors":
             user_details = User.objects.filter(
                 groups__name="Donor")
-        foodDetails_serializer = UserSerializer(
-            user_details, many=True)
+            foodDetails_serializer = UserSerializer(
+                user_details, many=True)
+
         return Response(foodDetails_serializer.data)
