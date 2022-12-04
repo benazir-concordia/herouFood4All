@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import MainLayout from "../../Layout/MainLayout";
 import { Link } from "react-router-dom";
 import { get_posted_food,edit_food, delete_food } from "../../../actions/food";
-import { Row, Col, Select, Button, Avatar } from "antd";
+import {Button, Avatar,Spin  } from "antd";
 import { connect } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import UpdateModal from "./UpdateModal";
@@ -64,6 +64,7 @@ class Dashboard extends Component {
       this.refs.childdelete.onCancel();
   };
   render() {
+   
     let user;
     if (this.props.user.groups[0]==1){
       user="donor"
@@ -151,7 +152,7 @@ class Dashboard extends Component {
               }
               </div>
               </div>
-          )):null}
+          )): <Spin />}
          <UpdateModal
                     ref={"childupdate"}
                     // searchData={this.searchData}

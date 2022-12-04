@@ -4,6 +4,10 @@ import { createMessage } from "./alerts";
 import { tokenConfig, tokenConfigUpload } from "./auth";
 
 export const get_posted_food = (type) => (dispatch, getState) => {
+    dispatch({
+        type: AllPostedFood,
+        payload: null,
+    });
     axios
         .get(`/api/get_posted_food/?type=${type}`, tokenConfig(getState))
         .then((res) => {
