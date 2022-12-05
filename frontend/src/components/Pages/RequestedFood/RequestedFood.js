@@ -67,7 +67,7 @@ class RequestedFood extends Component {
             </Fragment>
             :null}
            
-          <h1>List of Posted Food</h1>
+          <h1>List of Requested Food</h1>
           <br />
           {this.props.all_posted_food?
           this.props.all_posted_food.map((itm, i)=>(

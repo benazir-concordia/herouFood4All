@@ -34,6 +34,7 @@ class WebSite extends Component {
             <p>API Link for all currently requested foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_currently_requested_food')}>food4allappflix.herokuapp.com/api/food/all_currently_requested_food</Button></p>
             <p>API Link for all currently available foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_currently_available_food')}>food4allappflix.herokuapp.com/api/food/all_currently_available_food</Button></p>
             <p>API Link for all expired/wasted foods: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_expired_food')}>food4allappflix.herokuapp.com/api/food/all_expired_food</Button></p>
+            <p>API Link to get the details of all registered donors: <Button type="link" onClick={()=>window.location.assign('https://food4allappflix.herokuapp.com/api/food/all_listed_donors')}>food4allappflix.herokuapp.com/api/food/all_listed_donors</Button></p>
         </div>
         </div>
       </Fragment>
