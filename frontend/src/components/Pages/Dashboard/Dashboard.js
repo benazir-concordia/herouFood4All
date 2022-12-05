@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import UpdateModal from "./UpdateModal";
 import DeleteModal from "../../Common/DeleteModal/DeleteModal";
+import moment from "moment-timezone";
 import './dashboard.css'
 import DefFoodPic from "./food.png";
 class Dashboard extends Component {
@@ -51,8 +52,16 @@ class Dashboard extends Component {
     );
   }
   updateValues = (values) => {
+    let body={
+      "food_name":values.food_name,
+      "description":values.description,
+      "quantity":values.quantity,
+      "posted_date":moment(values.posted_date).format("YYYY-MM-DD"),
+      "status":values.status,
+    }
+    
     this.props.edit_food(
-        values,
+        body,
         this.state.row_id,
     );
     this.refs.childupdate.onCancel();
@@ -105,6 +114,19 @@ class Dashboard extends Component {
                 <h4 className="name" style={{color:"white"}}>{itm.food_name}</h4>
                 <p>Description: {itm.description}</p>
                 {itm.quantity?<p>Food Quantity: {itm.quantity}</p>:null}
+                {user=="donor"? 
+                  <p >Status:{itm.status} 
+                  {itm.status != "available" ?
+                  <div style={{background: "forestgreen",
+                    padding: "0px 10px"}}>
+                    <p>Requested By: {itm.requested_by_obj.name}<br/>
+                    Phone: {itm.requested_by_obj.phone}
+                    </p>
+                  </div>
+                  
+                  : null
+                }</p>:
+                  <p >Status: {itm.status==null?"Available":itm.status}</p>}
                 {user=="receiver"? 
                 <div>
                   <p><b>Donor Details :</b></p>

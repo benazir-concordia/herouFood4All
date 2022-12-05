@@ -117,7 +117,7 @@ class UpdateModal extends Component {
                   
                 >                  
                         <Select.Option value={"available"}>
-                          Available
+                          available
                         </Select.Option>
                         {/* <Select.Option value={"requested"}>
                           Requested

@@ -38,7 +38,7 @@ class FoodDetails extends Component {
           form_data.append("description", values.description);
           form_data.append("type", values.type);
           form_data.append("quantity", values.quantity);
-          form_data.append("posted_date", moment(values.posted_date).format("YYYY-MM-DD"));
+          form_data.append("posted_date", moment().format("YYYY-MM-DD"));
           form_data.append("posted_by", this.props.user.id);
           
 
