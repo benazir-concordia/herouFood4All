@@ -166,7 +166,8 @@ class Dashboard extends Component {
                 >
                   Request Food
               </Button>
-              <Link to={`/app/map/${itm.posted_by_obj.lat}/${itm.posted_by_obj.lon}`}>
+              <Link style={{paddingLeft: '16px',
+    fontWeight: 'bold'}} to={`/app/map/${itm.posted_by_obj.lat}/${itm.posted_by_obj.lon}`}>
                   check map
               </Link>
               </div>

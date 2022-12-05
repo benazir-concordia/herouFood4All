@@ -89,7 +89,7 @@ class RequestedFood extends Component {
                       <p>Status: {itm.status}</p>
                       {user=="receiver"? 
                 <div>
-                  <p><b>Donor Details :</b></p>
+                  <p style={{color: 'aliceblue'}}><b>Donor Details :</b></p>
                   <p>Donor : {itm.posted_by_obj.name}</p>
                   <p>Phone : {itm.posted_by_obj.phone}</p>
                   <p>Address : {itm.posted_by_obj.address}</p>

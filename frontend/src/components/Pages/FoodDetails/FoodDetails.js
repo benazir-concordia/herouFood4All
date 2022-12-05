@@ -85,7 +85,7 @@ class FoodDetails extends Component {
                         label="Quantity"
                         name="quantity"
                         
-                        rules={[{ required: false, message: "Please input quantity!" }]}
+                        rules={[{ required: true, message: "Please input quantity!" }]}
                     >
                         <Input style={{ width: "100%" }} placeholder="Food Quantity" />
                     </Form.Item>

@@ -56,27 +56,27 @@ function MapArea(props) {
   
   
   async function calculateRoute() {
+        if(value.lat & value.lon) {
 
-    
-
-    // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService()
-    // if(value.lat && value.lon){
-    const results = await directionsService.route({
-      origin: { lat: parseFloat(value.lat), lng: parseFloat(value.lon)},
-      destination: { lat: parseFloat(props.match.params.lat), lng: parseFloat(props.match.params.lon)},
-      
-      // origin: { lat: parseFloat(45.4874546), lng: parseFloat(-73.5745793)},
-      // destination: { lat: parseFloat(45.49493751227042), lng: parseFloat(-73.62394697318513)},
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING,
-    })
-    console.log(results,'results')
-    setDirectionsResponse(results)
-    setDistance(results.routes[0].legs[0].distance.text)
-    setDuration(results.routes[0].legs[0].duration.text)
-    // }
-  }
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService()
+        // if(value.lat && value.lon){
+        const results = await directionsService.route({
+          origin: { lat: parseFloat(value.lat), lng: parseFloat(value.lon)},
+          destination: { lat: parseFloat(props.match.params.lat), lng: parseFloat(props.match.params.lon)},
+          
+          // origin: { lat: parseFloat(45.4874546), lng: parseFloat(-73.5745793)},
+          // destination: { lat: parseFloat(45.49493751227042), lng: parseFloat(-73.62394697318513)},
+          // eslint-disable-next-line no-undef
+          travelMode: google.maps.TravelMode.DRIVING,
+        })
+        console.log(results,'results')
+        setDirectionsResponse(results)
+        setDistance(results.routes[0].legs[0].distance.text)
+        setDuration(results.routes[0].legs[0].duration.text)
+        // }
+        }   
+}
 
   // function clearRoute() {
   //   setDirectionsResponse(null)

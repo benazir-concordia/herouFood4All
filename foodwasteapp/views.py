@@ -73,13 +73,13 @@ class PostedFoodAPI(APIView):
         # donor's posted foods (delete delivered food which has been requested)
         if (request.user.groups.all()[0].id == 1):
             fooddetails = FoodDetails.objects.filter(
-                posted_by=request.user)
+                posted_by=request.user).order_by('-posted_date')
 
         # all currently available foods
         else:
             date_from = datetime.now() - timedelta(days=1)
             fooddetails = FoodDetails.objects.filter(
-                status="available", posted_date__gte=date_from)
+                status="available", posted_date__gte=date_from).order_by('-posted_date')
 
         foodDetails_serializer = FoodDetailsSerializer(
             fooddetails, many=True)
