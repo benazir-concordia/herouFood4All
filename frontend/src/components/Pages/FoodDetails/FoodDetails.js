@@ -26,8 +26,8 @@ class FoodDetails extends Component {
     onFinish = (values) => {
         let validate = true
         let form_data = new FormData();
-        if (values.image) {
-            values.image.map((anObjectMapped, index) => {
+        if (values.photo) {
+            values.photo.map((anObjectMapped, index) => {
                 form_data.append("photo", anObjectMapped.originFileObj);
                 if(anObjectMapped.type!='image/png'){
                     validate = false 

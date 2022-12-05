@@ -105,7 +105,8 @@ class Dashboard extends Component {
               <div key={i} 
               className="containeri"
                               >
-              <div style={{textAlign:'center',height: 149}}><Avatar  style={{width: '68%',
+              <div style={{textAlign:'center',height: 149}}>
+                <Avatar  style={{width: '68%',
                     height: '100%',
                     lineHeight: 500,
                     fontSize: 18}} shape="square" src={DefFoodPic} />
