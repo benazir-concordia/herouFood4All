@@ -147,7 +147,7 @@ const CreateUser = (props) => {
             <Form.Item
              label="Address"
               name="address"
-              rules={[{ required: true, message: "Please input address!" }]}
+              rules={[{ required: false, message: "Please input address!" }]}
             >
              <Autocomplete onPlaceChanged={onPlaceChanged} onLoad={onLoad}>
              <input
