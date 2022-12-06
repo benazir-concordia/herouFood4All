@@ -78,10 +78,10 @@ class RequestedFood extends Component {
               //                 borderRadius: '20px',
               //                 marginBottom: '20px'}}
                               >
-                <div style={{textAlign:'center',height: 149}}><Avatar  style={{width: '68%',
+                <div style={{textAlign:'center'}}><Avatar  style={{width: '68%',
                     height: '100%',
                     lineHeight: 500,
-                    fontSize: 18}} shape="square" src={DefFoodPic} /></div>
+                    fontSize: 18}} shape="square" src={itm.photo?itm.photo: DefFoodPic} /></div>
                     <div className="content-box">
                       <h4 className="name" style={{color:"white"}}>{itm.food_name}</h4>
                       <p>Description: {itm.description}</p>

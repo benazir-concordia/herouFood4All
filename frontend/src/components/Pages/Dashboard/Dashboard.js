@@ -105,11 +105,11 @@ class Dashboard extends Component {
               <div key={i} 
               className="containeri"
                               >
-              <div style={{textAlign:'center',height: 149}}>
+              <div style={{textAlign:'center'}}>
                 <Avatar  style={{width: '68%',
                     height: '100%',
                     lineHeight: 500,
-                    fontSize: 18}} shape="square" src={itm.photo?itm.photo.url: DefFoodPic} />
+                    fontSize: 18}} shape="square" src={itm.photo?itm.photo: DefFoodPic} />
               </div>
               <div className="content-box">
                 <h4 className="name" style={{color:"white"}}>{itm.food_name}</h4>
